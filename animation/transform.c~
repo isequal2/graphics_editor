@@ -1,0 +1,68 @@
+#include <stdio.h>
+#include <math.h>
+void ellips(float rx , float ry, int xc,int yc);
+int change[3][1];
+
+
+void actrotate(int tempx,int tempy,int inpx,int inpy,float angle)
+{
+	int sum=0,b[3][1]={{inpx},{inpy},{1}},i,j;
+	float a[3][3]={{cos(angle),-sin(angle),tempx*(1-cos(angle))+tempy*sin(angle)},{sin(angle),cos(angle),tempy*(1-cos(angle))-tempx*sin(angle)},{0,0,1}};
+	for(i=0;i<3;i++)
+	{
+		sum=0;
+		for(j=0;j<3;j++)
+		{
+		sum=sum+a[i][j]*b[j][0];
+		}
+		change[i][0]=sum;
+		//printf("%d\n",sum);
+				
+	}
+line( tempx, tempy, change[0][0],change[1][0]);
+//printf("%d\t%d\t%d\t%d\n",tempx, tempy, change[0][0],change[1][0]);
+
+}
+
+void actrotateleg(int tempx,int tempy,int inpx,int inpy,float angle)
+{
+	int sum=0,b[3][1]={{inpx},{inpy},{1}},i,j;
+	float a[3][3]={{cos(angle),-sin(angle),tempx*(1-cos(angle))+tempy*sin(angle)},{sin(angle),cos(angle),tempy*(1-cos(angle))-tempx*sin(angle)},{0,0,1}};
+	for(i=0;i<3;i++)
+	{
+		sum=0;
+		for(j=0;j<3;j++)
+		{
+		sum=sum+a[i][j]*b[j][0];
+		}
+		change[i][0]=sum;
+		//printf("%d\n",sum);
+				
+	}
+line( tempx, tempy, change[0][0],change[1][0]);
+ellips(30,25,change[0][0],change[1][0]-25);
+
+}
+
+
+void actrotate1(int tempx,int tempy,int inpx,int inpy,float angle,int boardx,int boardy)
+{
+	int sum=0,b[3][1]={{inpx},{inpy},{1}},i,j;
+	float a[3][3]={{cos(angle),-sin(angle),tempx*(1-cos(angle))+tempy*sin(angle)},{sin(angle),cos(angle),tempy*(1-cos(angle))-tempx*sin(angle)},{0,0,1}};
+	for(i=0;i<3;i++)
+	{
+		sum=0;
+		for(j=0;j<3;j++)
+		{
+		sum=sum+a[i][j]*b[j][0];
+		}
+		change[i][0]=sum;
+		//printf("%d\n",sum);
+				
+	}
+line( tempx, tempy, change[0][0],change[1][0]);
+line( change[0][0],change[1][0],boardx,boardy);
+ellips(30,25,change[0][0],change[1][0]-25);
+//printf("%d\t%d\t%d\t%d\n",tempx, tempy, change[0][0],change[1][0]);
+
+}
